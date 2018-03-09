@@ -15,3 +15,14 @@ app.use(session({
         port: settings.port
     })
 }));
+
+2、Error setting TTL index on collection : sessions报错
+
+解决办法：将mongodb和connect-mongo都跟新到最新版本
+在package.json修改
+"mongodb"：“2.0.42”，
+“connect-mongo”:“0.8.2”
+
+3、每次我们更新代码后，都需要手动停止并重启应用，使用 supervisor 模块可以解决这个问题，每当我们保存修改的文件时，supervisor 都会自动帮我们重启应用
+
+运行：supervisor bin/www
