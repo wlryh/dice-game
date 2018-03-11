@@ -124,6 +124,13 @@ module.exports = function(app) {
         res.redirect('/');
     });
 
+    app.get('/dice', function (req, res) {
+
+        res.render('dice/dice', {
+            title: 'dice'
+        });
+    });
+
     function checkLogin(req, res, next) {
         if (!req.session.user) {
             req.flash('error', '未登录!');
