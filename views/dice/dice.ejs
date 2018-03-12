@@ -8,6 +8,27 @@
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
 </head>
+<script type="text/javascript">
+    function getTime() {
+        var times = 60 * 100; // 60秒
+        countTime = setInterval(function() {
+            times = --times < 0 ? 0 : times;
+            var ms = Math.floor(times / 100).toString();
+
+            if(ms.length <= 1) {
+                ms = "0" + ms;
+            }
+            if(times == 0) {
+                alert("下一期开始");
+                times = 60 * 100
+
+                clearInterval(countTime);
+            }
+            // 获取分钟、毫秒数
+            $(".a").html(ms);
+        }, 10);
+    }
+</script>
 <body>
 <div class="container">
     <div class="row clearfix">
@@ -29,7 +50,9 @@
     </div>
     <div class="row clearfix">
         <div class="col-md-6 column">
-            <button type="button" class="btn btn-default">倒计时</button>
+            <button class="btn btn-info btn-lg" type="button" onclick="getTime()">
+                倒计时 <span class="badge a">60</span>
+            </button>
         </div>
         <div class="col-md-6 column">
             <button type="button" class="btn btn-default">掷骰子</button>

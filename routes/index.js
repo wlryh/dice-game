@@ -131,6 +131,12 @@ module.exports = function(app) {
         });
     });
 
+    app.get('/test',function (req, res) {
+        res.render('dice/test', {
+            title: '倒计时'
+        });
+    });
+
     function checkLogin(req, res, next) {
         if (!req.session.user) {
             req.flash('error', '未登录!');
