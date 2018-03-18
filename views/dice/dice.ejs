@@ -5,9 +5,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-reboot.min.css">
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
 </head>
+<style type="text/css">
+    .wrap{float:right;width:90px; height:90px; margin:120px auto 30px auto; position:relative;}
+    .dice{width:90px; height:90px; background:url(/images/dice.png) no-repeat; cursor:pointer;}
+    .dice_1{background-position:-5px -4px}
+    .dice_2{background-position:-5px -107px}
+    .dice_3{background-position:-5px -212px}
+    .dice_4{background-position:-5px -317px}
+    .dice_5{background-position:-5px -427px}
+    .dice_6{background-position:-5px -535px}
+    .dice_t{background-position:-5px -651px}
+    .dice_s{background-position:-5px -763px}
+    .dice_e{background-position:-5px -876px}
+    #dice_mask{width:90px; height:90px; background:#fff; opacity:0; position:absolute; top:0; left:0; z-index:999}
+</style>
 <script type="text/javascript">
     function getTime() {
         var times = 60 * 100; // 60秒
@@ -27,6 +43,62 @@
             // 获取分钟、毫秒数
             $(".a").html(ms);
         }, 10);
+    }
+    function getDice() {
+        var dice = $("#dice");
+        $(".wrap").append("<div id='dice_mask'></div>");//加遮罩
+        dice.attr("class","dice");//清除上次动画后的点数
+        dice.css('cursor','default');
+        var num = Math.floor(Math.random()*6+1);//产生随机数1-6
+        dice.animate({left: '+2px'}, 100,function(){
+            dice.addClass("dice_t");
+        }).delay(200).animate({top:'-2px'},100,function(){
+            dice.removeClass("dice_t").addClass("dice_s");
+        }).delay(200).animate({opacity: 'show'},600,function(){
+            dice.removeClass("dice_s").addClass("dice_e");
+        }).delay(100).animate({left:'-2px',top:'2px'},100,function(){
+            dice.removeClass("dice_e").addClass("dice_"+num);
+            $("#result").html("您掷得点数是<span>"+num+"</span>");
+            dice.css('cursor','pointer');
+            $("#dice_mask").remove();//移除遮罩
+        });
+        var dice2 = $("#dice2");
+        $(".wrap").append("<div id='dice_mask'></div>");//加遮罩
+        dice2.attr("class","dice");//清除上次动画后的点数
+        dice2.css('cursor','default');
+        var num2 = Math.floor(Math.random()*6+1);//产生随机数1-6
+        dice2.animate({left: '+2px'}, 100,function(){
+            dice2.addClass("dice_t");
+        }).delay(200).animate({top:'-2px'},100,function(){
+            dice2.removeClass("dice_t").addClass("dice_s");
+        }).delay(200).animate({opacity: 'show'},600,function(){
+            dice2.removeClass("dice_s").addClass("dice_e");
+        }).delay(100).animate({left:'-2px',top:'2px'},100,function(){
+            dice2.removeClass("dice_e").addClass("dice_"+num2);
+            $("#result2").html("您掷得点数是<span>"+num2+"</span>");
+            dice2.css('cursor','pointer');
+            $("#dice_mask").remove();//移除遮罩
+        });
+        var dice3 = $("#dice3");
+        $(".wrap").append("<div id='dice_mask'></div>");//加遮罩
+        dice3.attr("class","dice");//清除上次动画后的点数
+        dice3.css('cursor','default');
+        var num3 = Math.floor(Math.random()*6+1);//产生随机数1-6
+        dice3.animate({left: '+2px'}, 100,function(){
+            dice3.addClass("dice_t");
+        }).delay(200).animate({top:'-2px'},100,function(){
+            dice3.removeClass("dice_t").addClass("dice_s");
+        }).delay(200).animate({opacity: 'show'},600,function(){
+            dice3.removeClass("dice_s").addClass("dice_e");
+        }).delay(100).animate({left:'-2px',top:'2px'},100,function(){
+            dice3.removeClass("dice_e").addClass("dice_"+num3);
+            $("#result3").html("您掷得点数是<span>"+num3+"</span>");
+            dice3.css('cursor','pointer');
+            $("#dice_mask").remove();//移除遮罩
+        });
+        var s = num+num2+num3;
+        $("#result4").html(s);
+
     }
 </script>
 <body>
@@ -51,25 +123,43 @@
     <div class="row clearfix">
         <div class="col-md-6 column">
             <button class="btn btn-info btn-lg" type="button" onclick="getTime()">
-                倒计时 <span class="badge a">60</span>
+                倒计时
             </button>
+            <div style="float: right;margin-top: 60px;">
+                <h1><span class="badge a" style="font-size: 3em">60</span></h1>
+            </div>
         </div>
         <div class="col-md-6 column">
-            <button type="button" class="btn btn-default">掷骰子</button>
+            <button type="button" class="btn btn-info btn-lg" onclick="getDice()">掷骰子</button>
+            <div class="wrap">
+                <div id="dice" class="dice dice_1"></div>
+            </div>
+            <div class="wrap">
+                <div id="dice2" class="dice dice_1"></div>
+            </div>
+            <div class="wrap">
+                <div id="dice3" class="dice dice_1"></div>
+            </div>
+            <p id="result4"></p>
         </div>
     </div>
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <h2>
-                Heading
-            </h2>
-            <p>
-                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-            </p>
-            <p>
-                <a class="btn" href="#">View details »</a>
-            </p>
+
+            <button class="btn btn-info btn-lg" style="margin-right: 50px;width: 100px;margin-bottom: 50px" type="button" onclick="getTime()">
+                大
+            </button>
+            <button class="btn btn-info btn-lg" style="margin-right: 50px;width: 100px;margin-bottom: 50px" type="button" onclick="getTime()">
+                小
+            </button>
+            <button class="btn btn-info btn-lg" style="margin-right: 50px;width: 100px;margin-bottom: 50px" type="button" onclick="getTime()">
+                顺子
+            </button>
+            <button class="btn btn-info btn-lg" style="margin-right: 50px;width: 100px;margin-bottom: 50px" type="button" onclick="getTime()">
+                豹子
+            </button>
         </div>
+
     </div>
     <div class="row clearfix">
         <div class="col-md-12 column">
